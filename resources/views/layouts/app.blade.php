@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -21,7 +18,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark  bg-dark ">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -34,9 +31,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('Client.create') }}">Cadastrar Cliente <span class="sr-only">(current)</span></a>
-                        </li>
-                        
+                            <a class="nav-link" href="{{ route('Client.index') }}">Clientes <span class="sr-only">(current)</span></a>
+                        </li>                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -73,7 +69,45 @@
                     </ul>
                 </div>
             </div>
-        </nav>        
+        </nav>
+
+        <div class="container">
+             
+            <div class="py-5 text-center">
+                <h2>
+                    @yield('title')
+                </h2>
+            </div>
+            <div class="row">
+                <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
+
+                @yield('content')
+
+                </main>
+            </div>
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <p class="mb-1">&copy; 2019 Universidade Federal de Mato Grosso</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a href="#">Rondonópolis</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">Sistemas de Informação</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">Programção Web</a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+
+
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Loading Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>feather.replace()</script>    
 </body>
 </html>

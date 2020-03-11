@@ -67,7 +67,7 @@ class ClientController extends Controller
         $client->address = $request->address;        
         $client->save();
         
-        return redirect()->route('Client.index');     
+        return redirect()->route('Clients.index');     
     }
 
     /**

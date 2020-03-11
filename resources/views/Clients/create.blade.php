@@ -26,8 +26,9 @@
     </style>
 </head>
 <body>   
-   <h1 class="h1">Cadastrar Cliente</h1>
-  <form action="{{ route('Client.store') }}" method="POST" id="div-center">
+  <h1 class="h1">Cadastrar Cliente</h1>
+  <form method="POST" action="{{ route('Client.store') }}" id="div-center">
+    @csrf 
     <div class="form-group">
       <div class="col-sm-4">
         <label for="staticEmail" class="col-sm-2 col-form-label">Nome</label>
@@ -54,9 +55,7 @@
         </div>
       </div>     
     </div>
-    <div class="col-sm-8">
-      <button type="submit" id="div-btn" class="btn btn-outline-success">Cadastrar</button>
-    </div>
+    <button type="submit">GG</button>
   </form>   
 </body>
 </html>
