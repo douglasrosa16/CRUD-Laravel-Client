@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $clients = Client::All();
@@ -36,12 +38,36 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $c = new Client();
-        $c->name = $request->name;
-        $c->adderss = $request->adderss;
-        $c->mail = $request->mail;
-        $c->age = $request->age;
+    {   
+        $regras = [
+            'name' => 'required|min:2|max:20',          
+            'mail' => 'required|email|unique:clientes',
+            'age' => 'required|lt:200',
+            'address' => 'required'
+        ];
+            
+        $mensagens = [
+            'name.required' => 'Digite um nome válido.',
+            'name.min' => 'O nome precisa ter no mínimo 2 letras.',
+            'name.max' => 'O nome tem um tamanho máximo de 20 letras.',
+            'age.required' => 'A idade é requerida.',
+            'age.lt' => 'A idade máxima é de 150 anos.',
+            'mail.required' => 'Digite um endereço de email.',
+            'mail.email' => 'Digite um endereço de email válido',
+            'mail.unique' => 'Email já cadastrado',
+            'address.required' => 'Digite um endereço válido',            
+        ];
+            
+        $request->validate($regras, $mensagens);
+        
+        $client = new Client();
+        $client->name = $request->name;
+        $client->mail = $request->mail;
+        $client->age = $request->age;
+        $client->address = $request->address;        
+        $client->save();
+        
+        return redirect()->route('Client.index');     
     }
 
     /**
