@@ -41,7 +41,7 @@ class ClientController extends Controller
     {   
         $regras = [
             'name' => 'required|min:2|max:20',          
-            'mail' => 'required|email|unique:clientes',
+            'mail' => 'required|email|unique:clients',
             'age' => 'required|lt:200',
             'address' => 'required'
         ];
@@ -67,51 +67,59 @@ class ClientController extends Controller
         $client->address = $request->address;        
         $client->save();
         
-        return redirect()->route('Clients.index');     
+        return redirect()->route('Client.index');     
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Client $client)
+    public function show($id)
     {
-        //
+        $client = Client::find($id);
+        return view('Clients.info',compact(['client']));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Client $client)
+    public function edit($id)
     {
-        //
+        $client = Client::find($id);
+        return view('Clients.edit',compact(['client']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
-        //
+        $regras = [
+            'name' => 'required|min:2|max:20',          
+            'mail' => 'required|email|unique:clients',
+            'age' => 'required|lt:200',
+            'address' => 'required'
+        ];
+            
+        $mensagens = [
+            'name.required' => 'Digite um nome válido.',
+            'name.min' => 'O nome precisa ter no mínimo 2 letras.',
+            'name.max' => 'O nome tem um tamanho máximo de 20 letras.',
+            'age.required' => 'A idade é requerida.',
+            'age.lt' => 'A idade máxima é de 150 anos.',
+            'mail.required' => 'Digite um endereço de email.',
+            'mail.email' => 'Digite um endereço de email válido',
+            'mail.unique' => 'Email já cadastrado',
+            'address.required' => 'Digite um endereço válido',            
+        ];
+            
+        $request->validate($regras, $mensagens);
+
+        $c = Client::find($id);
+        $c->name = $request->name;
+        $c->age = $request->age;
+        $c->address = $request->address;
+        $c->mail = $request->mail;
+        $c->save(); 
+     
+        return redirect()->action('ClientController@index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Client $client)
-    {
-        //
+    public function destroy($id)
+    {   
+        $client = Client::find($id);
+        $client->delete();
+
+        return redirect()->action('ClientController@index');
     }
 }

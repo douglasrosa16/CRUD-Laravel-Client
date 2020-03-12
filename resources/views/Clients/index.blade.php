@@ -28,12 +28,12 @@
                 <td>{{$c->mail}}</td>                
                 <td>{{$c->age}}</td>
                 <td>
-                    <form action="" method="POST">
+                    <form action="{{route('Client.destroy',$c->id)}}" method="POST">
 
-                        <a href="" class="btn btn-sm">
+                        <a href="{{ route('Client.edit',$c->id) }}" class="btn btn-sm">
                             <i class="text-primary  feather-16"  data-feather="edit" ></i>
                         </a>
-                        <a href="" class="btn btn-sm">
+                        <a href="{{ route('Client.show',$c->id) }}" class="btn btn-sm">
                             <i class="text-info feather-16"  data-feather="eye" ></i>
                         </a>                        
                         <a href="" class="btn btn-sm">

@@ -85,20 +85,6 @@
 
                 </main>
             </div>
-            <footer class="my-5 pt-5 text-muted text-center text-small">
-                <p class="mb-1">&copy; 2019 Universidade Federal de Mato Grosso</p>
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <a href="#">Rondonópolis</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#">Sistemas de Informação</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#">Programção Web</a>
-                    </li>
-                </ul>
-            </footer>
         </div>
 
 
